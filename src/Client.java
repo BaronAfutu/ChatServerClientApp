@@ -9,7 +9,12 @@ public class Client {
 
         try{
             socket = new Socket("localhost",portNumber);
-        }  catch (IOException e) {
+            System.out.println("Connection Established...");
+
+            Thread.sleep(1000);
+            Thread server = new Thread(new ServerThread(socket));
+            server.start();
+        }  catch (IOException | InterruptedException e) {
             System.err.println("Fatal Connection Error!");
             e.printStackTrace();
         }
